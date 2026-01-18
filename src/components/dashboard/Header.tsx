@@ -1,4 +1,4 @@
-import { Shield, Activity, Wifi } from 'lucide-react';
+import { Activity, Wifi } from 'lucide-react';
 import { DemoState } from '@/types/security';
 
 interface HeaderProps {
@@ -29,7 +29,7 @@ export function Header({ demoState }: HeaderProps) {
     <header className="h-16 border-b border-border bg-card/50 backdrop-blur-md flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
-          <Shield className="h-8 w-8 text-primary" />
+          <img src="/logo.png" alt="Sentira Logo" className="h-8 w-auto" />
           <div>
             <h1 className="text-xl font-bold tracking-tight">
               <span className="text-primary text-glow-cyan">SENTIRA</span>
