@@ -1,4 +1,4 @@
-# Sentira  
+![IMG_6591](https://github.com/user-attachments/assets/7867a312-1b66-475d-b98f-defa656e8150)# Sentira  
 Real-Time Cyber Resilience for SaaS Platforms
 
 Sentira is a real-time cyber-resilience system designed for modern SaaS platforms.  
@@ -240,3 +240,8 @@ The goal of this workflow is to demonstrate that the system:
 - Contains the threat in real time
 - Maintains service availability
 
+![IMG_6591](https://github.com/user-attachments/assets/74ab4696-4b19-4d35-848b-a39214738d77)
+
+![IMG_6594](https://github.com/user-attachments/assets/f80edde4-98aa-4b34-87ba-74ad57ee6265)
+
+![IMG_6592](https://github.com/user-attachments/assets/17fab087-422e-4f1d-bf6b-6ab2ff583cc1)
