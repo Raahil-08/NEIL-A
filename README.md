@@ -1,119 +1,73 @@
-# SENTIRA
+# Welcome to your Lovable project
 
-A 2-service Node.js system for cyber-resilience monitoring and automated threat response.
+## Project info
 
-## Architecture
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                            Sentira                                      │
-├─────────────────────────────────┬───────────────────────────────────────┤
-│     Gateway Service (:3000)     │      Detector Service (:4000)         │
-├─────────────────────────────────┼───────────────────────────────────────┤
-│  • SaaS API Endpoints           │  • Telemetry Ingestion                │
-│    - POST /auth/login           │  • Detection Engine                   │
-│    - GET /data/item/:id         │    - Credential Stuffing              │
-│    - GET /data/export           │    - Data Exfiltration                │
-│    - POST /billing/pay          │  • Incident Management                │
-│                                 │  • Enforcement Orchestration          │
-│  • Enforcement Middleware       │  • Socket.IO Realtime                 │
-│    - Blocked IPs (403)          │  • Simulation Endpoints               │
-│    - Isolated Endpoints (423)   │                                       │
-│    - Rate Limits (429)          │  Events:                              │
-│                                 │    state_update, telemetry_event,     │
-│  • Telemetry Emission           │    incident_update, metric_update     │
-│    → POST to Detector           │                                       │
-└─────────────────────────────────┴───────────────────────────────────────┘
-```
+## How can I edit this code?
 
-## Detection Rules
+There are several ways of editing your application.
 
-### 1. Credential Stuffing (SEV1)
-- **Window**: 60 seconds per IP
-- **Triggers when**:
-  - Failed login count ≥ 12 AND
-  - Distinct user IDs targeted ≥ 5
-- **Containment**:
-  - BLOCK_IP for 15 minutes
-  - RATE_LIMIT /auth/login to 1 RPS
+**Use Lovable**
 
-### 2. Data Exfiltration (SEV1)
-- **Window**: 60 seconds per IP+userId
-- **Triggers when**:
-  - Export calls ≥ 30 OR
-  - Bytes exported ≥ 20MB
-- **Containment**:
-  - ISOLATE_ENDPOINT /data/export (surgical - only for offending IP/user)
+Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
 
-## Project Structure
+Changes made via Lovable will be committed automatically to this repo.
 
-```
-/
-├── package.json          # Root with concurrently scripts
-├── README.md
-├── gateway/
-│   ├── package.json
-│   └── src/
-│       ├── index.js      # Express server, routes
-│       ├── enforcement.js # Blocked IPs, isolation, rate limits
-│       └── telemetry.js   # Token mapping, telemetry forwarding
-└── detector/
-    ├── package.json
-    └── src/
-        ├── index.js       # Express + Socket.IO server
-        ├── store.js       # Centralized state management
-        ├── enforcementPush.js # Push rules to Gateway
-        ├── simulate.js    # Traffic generators
-        └── detection/
-            ├── credstuff.js # Credential stuffing detector
-            └── exfil.js     # Data exfiltration detector
-```
+**Use your preferred IDE**
 
-## Running the Project
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-### Prerequisites
-- Node.js v18 or later
-- npm
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-### Install Dependencies
-```bash
-  npm install #both folders
-```
-```bash
+Follow these steps:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-# Services:
-Gateway: http://localhost:3000
-Detector: http://localhost:4000
-Frontend: as configured in the frontend folder
 
-# Demo Controls
-The frontend provides safe, controlled demo actions:
-Start normal traffic
-Simulate credential stuffing
-Simulate data exfiltration
-Reset demo state
-All simulations generate real HTTP traffic through the gateway to ensure realism.
+**Edit a file directly in GitHub**
 
-# Human-in-the-Loop Security
-When auto-response is disabled:
-Threats are detected
-Actions are queued
-A human must approve containment from the Incidents page
-This reflects real-world security practices in critical systems.
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-# Metrics Tracked
-Telemetry ingest rate
-Requests per second
-Average latency
-Error rate
-Detection latency
-Response latency
-Anomaly score
+**Use GitHub Codespaces**
 
-# Design Philosophy
-ResiliWatch prioritizes:
-Resilience over shutdown
-Precision over blanket blocking
-Explainability over black-box decisions
-Continuity over disruption
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
+## What technologies are used for this project?
+
+This project is built with:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## How can I deploy this project?
+
+Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
