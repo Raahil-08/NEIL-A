@@ -1,73 +1,126 @@
-# Welcome to your Lovable project
+# Sentira  
+Real-Time Cyber Resilience for SaaS Platforms
 
-## Project info
+Sentira is a real-time cyber-resilience system designed for modern SaaS platforms.  
+It detects abnormal but authorized behavior (such as credential stuffing and silent data exfiltration) and **surgically isolates only the affected component**, while keeping the rest of the platform fully operational.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+The project demonstrates:
+- Live attack detection
+- Explainable anomaly analysis
+- Targeted containment (zero downtime)
+- Human-in-the-loop security control
+- Real-time SOC-style visualization
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Problem Statement
 
-**Use Lovable**
+Modern SaaS platforms rely on authentication, authorization, and perimeter security.  
+However, attackers increasingly abuse **valid credentials, API tokens, and authorized access paths**, allowing them to operate silently without triggering traditional security tools.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Current systems verify:
+- Who is accessing the system
+- What permissions they have
 
-Changes made via Lovable will be committed automatically to this repo.
+They fail to evaluate:
+- Whether the observed behavior makes sense in real time
 
-**Use your preferred IDE**
+Sentira addresses this gap by introducing **continuous behavioral monitoring and real-time containment**.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+    ## System Architecture
+    
+    ┌────────────┐ Telemetry ┌─────────────┐
+    │ Gateway │ ───────────▶ │   Detector  │
+    │ (SaaS API) │           │   (Brain)   │    
+    └────────────┘           └─────────────┘
+    ▲ │
+    │ │ Realtime state
+    │ ▼
+    ┌─────────────────┐
+    │ Frontend UI     │
+    │ (SOC Dashboard) │
+    └─────────────────┘
 
-Follow these steps:
+### Gateway
+- Simulates a SaaS platform (Auth, Data API, Billing)
+- Generates telemetry for every request
+- Enforces mitigation actions
+- Represents the external attack surface
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Detector
+- Collects telemetry from the gateway
+- Performs rule-based + anomaly detection
+- Creates explainable incidents
+- Orchestrates surgical containment
+- Streams live updates via Socket.IO
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Frontend
+- SOC-style dashboard (designed in Figma AI)
+- Live service health and metrics
+- Incident investigation and timelines
+- Manual approval for mitigations
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Simulated Attack Scenarios
+
+### 1. Credential Stuffing
+- Multiple failed login attempts from a single IP
+- Targets multiple user accounts
+- Detected via abnormal login patterns
+- Mitigation: **Block attacker IP only**
+
+### 2. Data Exfiltration (Authorized API Abuse)
+- Valid user repeatedly calls `/data/export`
+- High request frequency and data volume
+- Detected via behavioral anomalies
+- Mitigation: **Isolate export endpoint only**
+- Billing and other services remain unaffected
+
+---
+
+    ## Project Structure
+    
+    Sentira/
+    ├── frontend/ # UI (designed in Figma AI)
+    │
+    ├── gateway/ # SaaS Gateway Service
+    │ └── src/
+    │ ├── index.js
+    │ ├── telemetry.js
+    │ └── enforcement.js
+    │
+    ├── detector/ # Detection & Response Engine
+    │ └── src/
+    │ ├── index.js
+    │ ├── store.js
+    │ ├── simulate.js
+    │ ├── enforcementPush.js
+    │ └── detection/
+    │ ├── credstuff.js
+    │ └── exfil.js
+    │
+    ├── package.json
+    └── README.md
+
+---
+
+## Installation
+
+### Prerequisites
+- Node.js v18 or later
+- npm
+
+### Install dependencies
+```bash
+npm install
+```
+
+###Running the System
+  Start all services (Gateway + Detector)
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
