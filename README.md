@@ -244,4 +244,4 @@ The goal of this workflow is to demonstrate that the system:
 
 ![IMG_6594](https://github.com/user-attachments/assets/f80edde4-98aa-4b34-87ba-74ad57ee6265)
 
-![IMG_6592](https://github.com/user-attachments/assets/17fab087-422e-4f1d-bf6b-6ab2ff583cc1)
+
